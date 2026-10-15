@@ -1,0 +1,38 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  ADMIN
+  USER
+}
+
+enum Status {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+}
+
+model User {
+  id String @id @default(cuid())
+  email String @unique
+  name String
+  password String
+  role Role @default(USER)
+  createdAt DateTime @default(now())
+  @@map("user")
+}
+
+model Demands {
+   id Int @id @default(autoincrement())
+   title String
+   description String?
+   status Status @default(PENDING)
+   createdAt DateTime @default(now())
+    @@map("demands")
+}

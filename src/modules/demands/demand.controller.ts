@@ -1,8 +1,15 @@
 import { Request, Response } from "express";
 import { createDemand } from "./demand.service";
+import  { z } from "zod";
 
 export async function createDemandController(req: Request, res: Response) {
-  const { title, description } = req.body;
+
+  const bodySchema = z.object({
+    title: z.string(),
+    description: z.string()
+  })
+
+  const {title, description } = bodySchema.parse(req.body)
 
   const newDemand = await createDemand(title, description);
   return res.json({

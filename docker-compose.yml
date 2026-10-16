@@ -4,9 +4,9 @@ services:
     container_name: postgres
     restart: unless-stopped
     environment:
-      POSTGRES_DB: thalis
-      POSTGRES_USER: thalisbank
-      POSTGRES_PASSWORD: thalisbank
+      POSTGRES_DB: bank
+      POSTGRES_USER: bank123
+      POSTGRES_PASSWORD: bank321
     ports:
       - "5432:5432"
     volumes:

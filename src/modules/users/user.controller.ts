@@ -7,7 +7,7 @@ import jwt from "jsonwebtoken";
 export async function createUserController(req: Request, res: Response) {
   const validation = authSchema.RegisterSchema.safeParse(req.body);
   if (!validation.success) {
-    return res.json({
+    return res.status(404).json({
       message: "Dados inválidos.",
     });
   }
@@ -21,7 +21,7 @@ export async function createUserController(req: Request, res: Response) {
     name,
   );
 
-  return res.json({
+  return res.status(201).json({
     status: "Usuario criado com sucesso",
   });
 }
@@ -29,7 +29,7 @@ export async function createUserController(req: Request, res: Response) {
 export async function loginUserController(req: Request, res: Response) {
   const validation = authSchema.LoginSchema.safeParse(req.body);
   if (!validation.success) {
-    return res.json({
+    return res.status(400).json({
       message: "Dados inválidos.",
     });
   }

@@ -5,6 +5,7 @@ import { refreshRouter } from "./modules/refresh/refresh.route";
 
 app.use(userRouter, demandRouter, refreshRouter);
 
-app.listen(3000, () => {
-  console.log("API LIGADA NA PORTA 3000");
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log(`API LIGADA NA PORTA ${port}`);
 });

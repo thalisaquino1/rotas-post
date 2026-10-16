@@ -2,10 +2,10 @@ import { NextFunction, Request, Response} from "express";
 import  jwt  from "jsonwebtoken";
 
 export function Authenticate(req:Request, res: Response, next: NextFunction) {
-  const token = req.headers.authorization;
+  const token = req.headers.authorization?.replace("bearer ", "");
 
   if (!token) {
-    return res.json({
+    return res.status(401).json({
       message: "Token não informado."
     })
   }
@@ -13,6 +13,8 @@ export function Authenticate(req:Request, res: Response, next: NextFunction) {
     jwt.verify(token, process.env.JWT_SECRET!);
     next()
   } catch (error) {
-    console.error(error);
+    return res.status(401).json ({
+      message: "Token inválido ou expirado."
+    })
   }
 } 

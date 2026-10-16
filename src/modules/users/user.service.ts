@@ -24,7 +24,7 @@ export async function loginUser(email: string, password: string) {
     return false;
   }
 
-  const verifyPassword = Bcrypt.compare(password, user.password);
+  const verifyPassword = await Bcrypt.compare(password, user.password);
    
   if (!verifyPassword) {
     return false

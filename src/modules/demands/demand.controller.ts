@@ -12,7 +12,7 @@ export async function createDemandController(req: Request, res: Response) {
   const {title, description } = bodySchema.parse(req.body)
 
   const newDemand = await createDemand(title, description);
-  return res.json({
+  return res.status(201).json({
     status: "Demanda criada com sucesso",
   });
 
